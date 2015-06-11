@@ -81,8 +81,8 @@ func NewTxInfo(service string) TxInfo {
 }
 
 // TxContext creates a new context containing an TxInfo object in it's values storage.
-func TxContext(ctx context.Context, application string) context.Context {
-	return context.WithValue(ctx, ctxKeyTx, NewTxInfo(application))
+func TxContext(ctx context.Context, service string) context.Context {
+	return context.WithValue(ctx, ctxKeyTx, NewTxInfo(service))
 }
 
 // TxFromContext retrieves an TxInfo stored within a context.
