@@ -26,7 +26,6 @@ import (
 func TestContextCreations(t *testing.T) {
 	ctx := TxContext(
 		EnvContext(context.Background(), "myapp"),
-		"web",
 	)
 
 	env := EnvFromContext(ctx)
@@ -35,7 +34,7 @@ func TestContextCreations(t *testing.T) {
 	}
 
 	tx := TxFromContext(ctx)
-	if tx.Service != "web" || tx.TransactionID == uuid.Nil {
+	if tx.TransactionID == uuid.Nil {
 		t.Errorf("tx info not properly initialized in context: %#v", tx)
 	}
 }

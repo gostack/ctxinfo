@@ -68,21 +68,19 @@ func EnvFromContext(ctx context.Context) EnvInfo {
 // environment information but unlike EnvInfo, it is expected to be created multiple time
 // over the execution of a program.
 type TxInfo struct {
-	Service       string
 	TransactionID uuid.UUID
 }
 
 // NewTxInfo returns a new initialized TxInfo instance.
-func NewTxInfo(service string) TxInfo {
+func NewTxInfo() TxInfo {
 	return TxInfo{
-		Service:       service,
 		TransactionID: uuid.NewV4(),
 	}
 }
 
 // TxContext creates a new context containing an TxInfo object in it's values storage.
-func TxContext(ctx context.Context, service string) context.Context {
-	return context.WithValue(ctx, ctxKeyTx, NewTxInfo(service))
+func TxContext(ctx context.Context) context.Context {
+	return context.WithValue(ctx, ctxKeyTx, NewTxInfo())
 }
 
 // TxFromContext retrieves an TxInfo stored within a context.
