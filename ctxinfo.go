@@ -57,8 +57,10 @@ func EnvContext(ctx context.Context, application string) context.Context {
 
 // EnvFromContext retrieves an EnvInfo stored within a context.
 func EnvFromContext(ctx context.Context) EnvInfo {
-	if info, ok := ctx.Value(ctxKeyEnv).(EnvInfo); ok {
-		return info
+	if ctx != nil {
+		if info, ok := ctx.Value(ctxKeyEnv).(EnvInfo); ok {
+			return info
+		}
 	}
 
 	return EnvInfo{}
@@ -85,8 +87,10 @@ func TxContext(ctx context.Context) context.Context {
 
 // TxFromContext retrieves an TxInfo stored within a context.
 func TxFromContext(ctx context.Context) TxInfo {
-	if info, ok := ctx.Value(ctxKeyTx).(TxInfo); ok {
-		return info
+	if ctx != nil {
+		if info, ok := ctx.Value(ctxKeyTx).(TxInfo); ok {
+			return info
+		}
 	}
 
 	return TxInfo{}
