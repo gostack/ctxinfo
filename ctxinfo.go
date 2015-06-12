@@ -91,3 +91,15 @@ func TxFromContext(ctx context.Context) TxInfo {
 
 	return TxInfo{}
 }
+
+// Info is simply a object that combines EnvInfo and TxInfo for easy of consumption.
+type Info struct {
+	EnvInfo
+	TxInfo
+}
+
+// FromContext simply gets the EnvInfo and TxInfo object out of the context, returning
+// a combined representation of it.
+func FromContext(ctx context.Context) Info {
+	return Info{EnvFromContext(ctx), TxFromContext(ctx)}
+}
